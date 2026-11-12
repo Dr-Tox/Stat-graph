@@ -1,0 +1,2 @@
+"method","study","endpoint","comparison","groups","sample_sizes","estimate","lower","upper","statistic","df","p","alpha","confidence","correction","assumptions"
+"Welch t-test","study_1","Relative liver weight","Control minus Dose 0.001","Control | Dose 0.001","Control: 8 | Dose 0.001: 8",-0.0532146437551244,-0.384798565376779,0.27836927786653,-0.481702175889429,13.2860934242378,0.637855167611841,0.01,0.99,"none","Independent experimental units; approximately normal sampling distribution of means. Welch allows unequal variances."

@@ -1,0 +1,6 @@
+result <- testthat::test_dir('tests/testthat',reporter='summary',stop_on_failure=FALSE)
+report <- as.data.frame(result)
+dir.create('artifacts',showWarnings=FALSE)
+utils::write.csv(report[setdiff(names(report),'result')],'artifacts/test-results.csv',row.names=FALSE)
+if(any(report$failed>0 | report$error)) quit(status=1)
+cat(sprintf('\n%d test blocks; %d assertions passed; %d failures; %d errors.\n',nrow(report),sum(report$passed),sum(report$failed),sum(report$error)))

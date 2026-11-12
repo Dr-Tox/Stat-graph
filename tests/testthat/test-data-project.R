@@ -1,0 +1,52 @@
+testthat::test_that('raw, summary, wide, CSV, Excel and malformed inputs are handled', {
+ tab <- data.frame(dose=c(0,1),value=c(4,5))
+ d <- map_table(tab,list(dose='dose',value='value'),endpoint='Liver',dose_unit='mg/kg/day',response_unit='%')
+ testthat::expect_equal(d$value,c(4,5))
+ testthat::expect_error(map_table(transform(tab,value=c(NA,5)),list(dose='dose',value='value'),endpoint='Liver',dose_unit='mg/kg/day',response_unit='%'),'finite numeric')
+ testthat::expect_error(map_table(tab,list(dose='absent',value='value'),endpoint='Liver',dose_unit='mg/kg/day',response_unit='%'),'not found')
+ wide <- data.frame('0'=c(1,2),'10'=c(3,4),check.names=FALSE)
+ wd <- map_table(wide,list(),endpoint='ALT',dose_unit='mg/kg/day',response_unit='U/L',wide_columns=c('0','10'))
+ testthat::expect_equal(sort(wd$dose),c(0,0,10,10))
+ sm <- data.frame(dose=0,mean=4,sd=1,n=8)
+ sd <- map_table(sm,as.list(stats::setNames(names(sm),names(sm))),mode='summary',endpoint='ALT',dose_unit='mg/kg/day',response_unit='U/L')
+ testthat::expect_true(is.na(sd$value));testthat::expect_false('Violin' %in% graph_types(sd))
+ testthat::expect_error(validate_data(transform(sd,n=1.5)),'integer')
+ for(ext in c('csv','xlsx')) {
+  path <- tempfile(fileext=paste0('.',ext));if(ext=='csv') utils::write.csv(tab,path,row.names=FALSE) else openxlsx::write.xlsx(tab,path)
+  testthat::expect_equal(read_table_file(path),tab,ignore_attr=TRUE)
+ }
+ path <- tempfile(fileext='.csv');writeLines('dose,value\nx,y',path)
+ testthat::expect_error(map_table(read_table_file(path),list(dose='dose',value='value'),endpoint='ALT',dose_unit='mg/kg/day',response_unit='U/L'),'nonnumeric')
+})
+testthat::test_that('JSON project roundtrips data, selection, metadata, presets and settings safely', {
+ p <- example_project(14);p$selected <- c('study_2','study_11');p$settings <- list(axes=axis_settings(),graph=graph_defaults(),view=list(endpoint='Relative liver weight',filters=list(sex='Male')))
+ p$settings$axes$intervals <- parse_intervals('0,1,1\n10,10000,2');p$presets$Test <- p$settings
+ path <- tempfile(fileext='.json');save_project(p,path);q <- load_project(path)
+ testthat::expect_equal(q$data,p$data);testthat::expect_equal(q$selected,p$selected);testthat::expect_equal(q$datasets,p$datasets)
+ a <- normalize_settings(q$settings$axes,axis_settings());testthat::expect_equal(a,p$settings$axes)
+ testthat::expect_equal(normalize_settings(q$settings$graph,graph_defaults()),graph_defaults())
+ writeLines('{"format":"Rcode","version":1}',path);testthat::expect_error(load_project(path),'Unsupported')
+ writeLines('not JSON',path);testthat::expect_error(load_project(path))
+ p$next_id <- 1;save_project(p,path);testthat::expect_error(load_project(path),'overwrite')
+})
+testthat::test_that('legacy means and SD without n remain visualizable but cannot support inference', {
+ tab <- data.frame(dose=c(0,1),mean=c(4,5),sd=c(.2,.3))
+ d <- map_table(tab,list(dose='dose',mean='mean',sd='sd'),mode='summary',endpoint='Liver',dose_unit='mg/kg/day',response_unit='%')
+ testthat::expect_true(all(is.na(d$n)));testthat::expect_true('Mean ± SD' %in% graph_types(d));testthat::expect_false('Mean ± SEM' %in% graph_types(d))
+ f <- build_figure(d);testthat::expect_equal(f$coordinates$ymin,c(3.8,4.7))
+ testthat::expect_error(run_analysis(d,'Welch t-test'),'n >= 2')
+})
+testthat::test_that('retained numeric source variables support flexible paired-axis scatter without altering dose', {
+ p <- example_project();d <- comparison_data(p,p$selected,'Relative liver weight')
+ g <- graph_defaults();g$type <- 'Scatter';g$x_variable <- 'xaux_value'
+ f <- build_figure(d,g=g);testthat::expect_equal(f$coordinates$.x,d$value);testthat::expect_equal(f$coordinates$dose,d$dose)
+ g$type <- 'Dose-response';testthat::expect_error(build_figure(d,g=g),'Generic source X')
+})
+testthat::test_that('endpoint and unit columns retain biological identity and normalize compatible row units explicitly', {
+ tab <- data.frame(dose=c(1,1000),dose_unit=c('mg/kg/day','ug/kg/day'),value=c(2,.002),response_unit=c('ng/mL','ug/mL'),endpoint=c('ALT','AST'))
+ mapping <- as.list(stats::setNames(names(tab),names(tab)))
+ d <- map_table(tab,mapping,endpoint='',dose_unit='',response_unit='',target_dose='ug/kg/day',target_response='ng/mL')
+ testthat::expect_equal(d$dose,c(1000,1000));testthat::expect_equal(d$value,c(2,2));testthat::expect_equal(d$endpoint,c('ALT','AST'))
+ original <- map_table(tab,mapping,endpoint='',dose_unit='',response_unit='',target_dose='',target_response='')
+ testthat::expect_equal(original$dose_unit,tab$dose_unit);testthat::expect_equal(original$response_unit,tab$response_unit)
+})

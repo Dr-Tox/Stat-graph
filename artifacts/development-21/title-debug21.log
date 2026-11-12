@@ -1,0 +1,28 @@
+STATUS Applied. Scientific observations are unchanged.
+INPUT Debug title
+PLOT 0
+2500
+5000
+7500
+10000
+4.0
+4.5
+5.0
+5.5
+studysexcollection_time
+Study 1 [study_1]
+Female
+Male
+Study 2 [study_2]
+Female
+Male
+Study 3 [study_3]
+Female
+Male
+Study 4 [study_4]
+Female
+Male
+Debug title
+Dose (mg/kg/day)
+Relative liver weight (%)
+AFTER Applied. Scientific observations are unchanged.

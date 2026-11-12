@@ -1,0 +1,83 @@
+StatLab 2.1
+Compare Datasets
+Data Manager
+Statistics
+Results
+Export / Projects
+SCIENTIFIC COMPARISON WORKSPACE
+LOCAL DATA · INDEPENDENT STUDIES
+COMPARISON PROPERTIES
+Studies
+4 active · 4 visible · 4 imported
+Search studies:
+Study	ID	Active	Visible	Highlight
+Study
+	
+ID
+	
+Active
+	
+Visible
+	
+Highlight
+
+Study 1	study_1	true	true	false
+Study 2	study_2	true	true	false
+Study 3	study_3	true	true	false
+Study 4	study_4	true	true	false
+Showing 1 to 4 of 4 entries
+Previous
+1
+Next
+Select all Clear selection Use search results
+Selected-row actions
+Common endpoint
+Relative liver weight
+Experimental filters
+Graph editor
+Undo
+Redo
+0 undo · 0 redo
+Changes apply automatically after a short pause. Data and statistical calculations are not undone by graph editing.
+Graph Type
+Titles & Labels
+Axes
+Data & Groups
+Statistical Annotations
+Lines & Appearance
+Legends & Layout
+Export Settings
+Presets & Reset
+Apply graph settings
+Ready. All edits affect display only.
+Show / hide properties
+Collapse / expand legend
+4 independent studies · 256 input rows · Relative liver weight · raw
+0
+2500
+5000
+7500
+10000
+4.0
+4.5
+5.0
+5.5
+studysexcollection_time
+Study 1 [study_1]
+Female
+Male
+Study 2 [study_2]
+Female
+Male
+Study 3 [study_3]
+Female
+Male
+Study 4 [study_4]
+Female
+Male
+Independent studies · common endpoint
+Dose (mg/kg/day)
+Relative liver weight (%)
+Figure diagnostics
+Exact plotted coordinates
+StatLab 2.1 · Scientific visualization first · Synthetic example studies loaded for exploration

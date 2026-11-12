@@ -1,0 +1,20 @@
+PASS advanced-21.png project roundtrip pixels
+PASS editor-plot-before-21.png project roundtrip pixels
+PASS advanced-21 SVG single customized title
+PASS advanced-21 SVG facets, letters, Unicode and asterisks
+PASS advanced-21 SVG customized axis titles
+PASS advanced-21 SVG split-panel range labels
+PASS advanced-21 PDF single customized title
+PASS advanced-21 PDF facets, letters, Unicode and asterisks
+PASS advanced-21 PDF customized axis titles
+PASS advanced-21 PDF split-panel range labels
+PASS advanced-21 PNG rendered
+PASS editor-browser-21 SVG single customized title
+PASS editor-browser-21 SVG facets, letters, Unicode and asterisks
+PASS editor-browser-21 SVG customized axis titles
+PASS editor-browser-21 SVG split-panel range labels
+PASS editor-browser-21 PDF single customized title
+PASS editor-browser-21 PDF facets, letters, Unicode and asterisks
+PASS editor-browser-21 PDF customized axis titles
+PASS editor-browser-21 PDF split-panel range labels
+PASS editor-browser-21 PNG rendered

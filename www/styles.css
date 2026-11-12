@@ -1,0 +1,26 @@
+body { background:#f5f7fa; color:#233744; }
+.navbar { box-shadow:0 2px 8px #152f3d15; }
+.brand {font-weight:750;letter-spacing:-.6px}.version {color:#18a7a0;font-weight:400}
+.topline {padding:18px 24px 12px;font-size:11px;font-weight:700;letter-spacing:1.7px;color:#55727d}
+.local-badge {float:right;color:#18776b;letter-spacing:1px}
+.tab-content {padding:10px 24px}.well {background:#fff;border:1px solid #e1e7ed;border-radius:12px;padding:18px}
+.figure-summary {background:white;border:1px solid #e1e7ed;border-radius:10px;padding:18px;margin-bottom:14px;font-size:14px}
+.form-group {margin-bottom:11px}label{font-size:12px;font-weight:600}
+details {margin:12px 0;padding-top:10px;border-top:1px solid #e1e7ed}summary{font-weight:650;color:#146c78;margin-bottom:12px;cursor:pointer}
+.help-block{font-size:12px;color:#647785}.btn {margin:3px 2px}.footer{padding:20px 24px;color:#647785;font-size:12px}
+.shiny-output-error-validation{padding:30px;color:#9b541a;background:#fff8ee;border-radius:8px}
+h3{font-size:21px}h4{font-size:16px}.shiny-plot-output,.plotly{background:white;border-radius:10px}
+.statlab-workspace{display:grid;grid-template-columns:370px minmax(0,1fr);gap:22px;align-items:start}
+.workspace-properties{background:#fff;border:1px solid #dce5eb;border-radius:12px;padding:16px;max-height:calc(100vh - 155px);overflow:auto;position:sticky;top:14px}
+.properties-heading{font-size:10px;letter-spacing:1.7px;font-weight:750;color:#58737d;margin-bottom:10px}
+.workspace-figure{min-width:0}.figure-toolbar{display:flex;justify-content:space-between;margin-bottom:8px}
+.editor-category{border:1px solid #e2e9ee;border-radius:7px;margin:7px 0;padding:9px 10px;background:#fcfdfe}
+.editor-category>summary{margin:0;color:#214f5b;font-size:13px}.editor-category[open]>summary{margin-bottom:12px}
+.editor-property{padding:8px 0;margin:5px 0}.editor-property>summary{font-size:12px;color:#426575}
+.editor-advanced{border-left:2px solid #d8e7ed;padding-left:9px;background:#f6f9fb}
+.editor-toolbar{display:flex;align-items:center;flex-wrap:wrap;font-size:11px;gap:4px}.editor-toolbar .btn{font-size:12px;padding:5px 10px}
+.study-manager .dataTables_filter{float:none;text-align:left}.study-manager .dataTables_filter input{width:140px}
+.study-manager table{font-size:11px}.study-manager .dataTables_info,.study-manager .dataTables_paginate{font-size:10px}.compact-actions .btn{font-size:11px;padding:5px 8px}
+.properties-collapsed{grid-template-columns:minmax(0,1fr)}.properties-collapsed>.workspace-properties{display:none}
+@media(max-width:1000px){.statlab-workspace{grid-template-columns:320px minmax(0,1fr)}.tab-content{padding:8px 10px}}
+@media(max-width:760px){.statlab-workspace{display:flex;flex-direction:column}.workspace-figure{order:0;width:100%}.workspace-properties{order:1;position:static;max-height:none;width:100%}.local-badge{float:none;display:block;margin-top:6px}.figure-toolbar .btn{font-size:11px}.properties-collapsed>.workspace-properties{display:none}}

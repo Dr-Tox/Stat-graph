@@ -1,0 +1,9 @@
+"study_name","dose_mg_kg_day","sex","generation","days_exposed","collection_time","mean_serumconc_ng_ML","sd_serumconc","mean_body_weight_g"
+"Legacy A",0,"Female","F0",28,28,1,0.3,200
+"Legacy A",0.001,"Female","F0",28,28,2,0.3,201
+"Legacy A",0.01,"Female","F0",28,28,3,0.3,202
+"Legacy A",0.1,"Female","F0",28,28,4,0.3,203
+"Legacy B",0,"Female","F0",28,28,1,0.3,201
+"Legacy B",100,"Female","F0",28,28,4,0.3,204
+"Legacy B",1000,"Female","F0",28,28,7,0.3,207
+"Legacy B",10000,"Female","F0",28,28,10,0.3,210

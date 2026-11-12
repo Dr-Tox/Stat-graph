@@ -1,0 +1,96 @@
+[
+  {
+    "check": "advanced-21.png project roundtrip pixels",
+    "passed": true,
+    "exact": true,
+    "rms": 0.0,
+    "changed_fraction": 0.0,
+    "dimensions": [
+      4200,
+      2400
+    ]
+  },
+  {
+    "check": "editor-plot-before-21.png project roundtrip pixels",
+    "passed": true,
+    "exact": false,
+    "rms": 0.0,
+    "changed_fraction": 0.0,
+    "dimensions": [
+      1236,
+      761
+    ]
+  },
+  {
+    "check": "advanced-21 SVG single customized title",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 SVG facets, letters, Unicode and asterisks",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 SVG customized axis titles",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 SVG split-panel range labels",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 PDF single customized title",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 PDF facets, letters, Unicode and asterisks",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 PDF customized axis titles",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 PDF split-panel range labels",
+    "passed": true
+  },
+  {
+    "check": "advanced-21 PNG rendered",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 SVG single customized title",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 SVG facets, letters, Unicode and asterisks",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 SVG customized axis titles",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 SVG split-panel range labels",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 PDF single customized title",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 PDF facets, letters, Unicode and asterisks",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 PDF customized axis titles",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 PDF split-panel range labels",
+    "passed": true
+  },
+  {
+    "check": "editor-browser-21 PNG rendered",
+    "passed": true
+  }
+]

@@ -1,0 +1,9 @@
+PASS split/facet preview has one shared customized X title
+PASS split/facet preview has one shared customized Y title
+PASS split/facet axis-title color preserved
+PASS split/facet significance labels remain present
+PASS PNG final annotated export
+PASS SVG final annotated export
+PASS PDF final annotated export
+PASS shared axis titles survive reopening
+PASS final split/facet render has no JavaScript errors

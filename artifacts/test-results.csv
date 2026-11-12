@@ -1,0 +1,46 @@
+"file","context","test","nb","failed","skipped","error","warning","user","system","real","passed"
+"test-axes.R","axes","linear, log10, pseudo-log and reverse transformations preserve exact source coordinates",21,0,FALSE,FALSE,0,2.903,0.327,3.235,21
+"test-axes.R","axes","arbitrary visible intervals create real panels and reject invalid boundaries",29,0,FALSE,FALSE,0,1.436,0.01,1.488,29
+"test-axes.R","axes","custom ticks, limits and exports retain panel configuration",7,0,FALSE,FALSE,0,3.079,0.084,3.168,7
+"test-axes.R","axes","time axes retain independent dose series and independent Y panels are labeled",36,0,FALSE,FALSE,0,0.523999999999999,0.001,0.523999999999999,36
+"test-axes.R","axes","interactive split panels support single-point series and deduplicate legends",3,0,FALSE,FALSE,0,1.149,0.00700000000000001,1.158,3
+"test-axes.R","axes","split facets retain aligned study/sex cells when subgroups or doses are missing",3,0,FALSE,FALSE,0,1.252,0.005,1.257,3
+"test-axes.R","axes","axis module accepts Shiny logical NA for empty numeric inputs and applies real intervals",2,0,FALSE,FALSE,0,0.710999999999999,0.00600000000000001,0.719000000000001,2
+"test-comparison.R","comparison","1, 2, 5, 14 and 25 studies import and arbitrary subsets retain identities",65,0,FALSE,FALSE,0,0.837,0.17,1.006,65
+"test-comparison.R","comparison","common endpoint and subgroup filtering never invents absent data",5,0,FALSE,FALSE,0,0.244,0,0.244,5
+"test-comparison.R","comparison","units must match and explicit compatible conversions are exact",3,0,FALSE,FALSE,0,0.0310000000000006,0,0.0309999999999988,3
+"test-comparison.R","comparison","editing and deletion update canonical comparisons",2,0,FALSE,FALSE,0,0.027000000000001,0,0.0269999999999992,2
+"test-data-project.R","data-project","raw, summary, wide, CSV, Excel and malformed inputs are handled",10,0,FALSE,FALSE,0,0.272,0.0389999999999999,0.317,10
+"test-data-project.R","data-project","JSON project roundtrips data, selection, metadata, presets and settings safely",8,0,FALSE,FALSE,0,0.452,0.027,0.687000000000001,8
+"test-data-project.R","data-project","legacy means and SD without n remain visualizable but cannot support inference",5,0,FALSE,FALSE,0,0.322999999999999,0.028,0.677999999999999,5
+"test-data-project.R","data-project","retained numeric source variables support flexible paired-axis scatter without altering dose",3,0,FALSE,FALSE,0,0.183,0.015,0.312999999999999,3
+"test-data-project.R","data-project","endpoint and unit columns retain biological identity and normalize compatible row units explicitly",5,0,FALSE,FALSE,0,0.0169999999999995,0.004,0.0230000000000015,5
+"test-editor-21.R","editor-21","study colors are stable with 1, 2, 5, 14, 25 and 35 datasets and arbitrary selections",10,0,FALSE,FALSE,0,0.554,0.00800000000000001,0.665000000000001,10
+"test-editor-21.R","editor-21","manual annotations remain bound to study, endpoint, treatment, dose and stratum",8,0,FALSE,FALSE,0,0.463000000000001,0.005,0.478999999999999,8
+"test-editor-21.R","editor-21","letters, stars and brackets coexist on split and log axes with male/female facets",18,0,FALSE,FALSE,0,8.356,0.14,9.492,18
+"test-editor-21.R","editor-21","manual letters require unambiguous complete anchors rather than X alone",4,0,FALSE,FALSE,0,0.0559999999999974,0,0.0560000000000009,4
+"test-editor-21.R","editor-21","automatic annotations use verified adjusted results without recomputing or pooling studies",12,0,FALSE,FALSE,0,1.604,0.347,1.998,12
+"test-editor-21.R","editor-21","automatic evidence survives save/reopen and stale rendered annotations are suppressed",4,0,FALSE,FALSE,0,0.391000000000002,0,0.393999999999998,4
+"test-editor-21.R","editor-21","compact letter display covers nonsignificant pairs and separates significant pairs",5,0,FALSE,FALSE,0,0.0120000000000005,0,0.0130000000000017,5
+"test-editor-21.R","editor-21","v1 migration, v2 roundtrip, unknown fields and custom presets are preserved",7,0,FALSE,FALSE,0,0.155999999999999,0,0.156000000000002,7
+"test-editor-21.R","editor-21","undo/redo restores graph and axes without changing scientific observations",5,0,FALSE,FALSE,0,0.0610000000000035,0.004,0.0649999999999977,5
+"test-editor-21.R","editor-21","style presets remain editable and preserve annotation anchors and evidence",14,0,FALSE,FALSE,0,0.106000000000002,0,0.108000000000001,14
+"test-editor-21.R","editor-21","visual study order follows registry order rather than alphabetical display labels",2,0,FALSE,FALSE,0,0.0310000000000024,0.00300000000000011,0.0350000000000001,2
+"test-editor-21.R","editor-21","annotations follow dodged bar groups while retaining original dose coordinates",4,0,FALSE,FALSE,0,0.262,0,0.262,4
+"test-editor-21.R","editor-21","changing asterisk cutoffs updates validated labels without changing p-values or observations",5,0,FALSE,FALSE,0,0.0940000000000012,0,0.0980000000000025,5
+"test-editor-21.R","editor-21","interval reordering follows the selected draft row and keeps invalid order out of the figure",5,0,FALSE,FALSE,0,0.177,0,0.177,5
+"test-editor-21.R","editor-21","legacy positional colors migrate to stable study and subgroup keys",4,0,FALSE,FALSE,0,0.097999999999999,0,0.0990000000000002,4
+"test-editor-21.R","editor-21","unknown scientific fields are rejected explicitly rather than ignored or pooled",2,0,FALSE,FALSE,0,0.0409999999999968,0.00300000000000011,0.0449999999999982,2
+"test-editor-21.R","editor-21","automatic metadata titles do not overwrite retained manual labels",3,0,FALSE,FALSE,0,0.202000000000002,0,0.211000000000002,3
+"test-editor-21.R","editor-21","zero-control label offsets stay in the linear control panel, not the positive log panel",4,0,FALSE,FALSE,0,0.173000000000002,0,0.175000000000001,4
+"test-editor-21.R","editor-21","ambiguous doses cannot receive a time-axis label merely because X is shared",3,0,FALSE,FALSE,0,0.245000000000001,0,0.245999999999999,3
+"test-editor-21.R","editor-21","brackets with omitted endpoints cannot masquerade as comparisons between visible groups",2,0,FALSE,FALSE,0,0.276999999999997,0,0.276,2
+"test-editor-21.R","editor-21","editing an automatic p-value makes its updated label manual and rejects invalid probabilities",6,0,FALSE,FALSE,0,0.345000000000002,0,0.344999999999999,6
+"test-editor-21.R","editor-21","preparation keys exclude presentation order and typography but include actual scientific edits",3,0,FALSE,FALSE,0,0.0429999999999993,0,0.0430000000000028,3
+"test-editor-21.R","editor-21","sex symbols and line patterns retain identity when other groups are filtered out",8,0,FALSE,FALSE,0,0.083000000000002,0.0109999999999999,0.093,8
+"test-editor-21.R","editor-21","publication labels can omit technical IDs without merging identically named studies",3,0,FALSE,FALSE,0,0.0410000000000004,0,0.0410000000000004,3
+"test-editor-21.R","editor-21","v1 automatic palette appearances migrate once and then remain stable by study ID",2,0,FALSE,FALSE,0,0.122,0,0.123999999999999,2
+"test-editor-21.R","editor-21","faceted split Plotly figures retain independent shared axis typography",4,0,FALSE,FALSE,0,1.313,0.00700000000000012,1.334,4
+"test-statistics.R","statistics","raw and sufficient-statistic t-tests match R independently",12,0,FALSE,FALSE,0,0.0630000000000024,0.00299999999999989,0.0670000000000002,12
+"test-statistics.R","statistics","ANOVA, Tukey and Dunnett match independent fitted-model references",8,0,FALSE,FALSE,0,0.161999999999999,0,0.161999999999999,8
+"test-statistics.R","statistics","rank methods match R and unsupported summary inference is rejected",12,0,FALSE,FALSE,0,0.148999999999997,0.0109999999999999,0.162999999999997,12

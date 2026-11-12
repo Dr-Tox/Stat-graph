@@ -1,0 +1,9 @@
+"dataset_id","endpoint","dose","dose_unit","response_unit","treatment","sex","generation","exposure","collection_time","subgroup","mean","sd","n","mode","se","lower","upper"
+"study_1","Relative liver weight",0,"mg/kg/day","%","Control","Female","Unspecified","Unspecified","Unspecified","Unspecified",3.98280547634916,0.19365040041801,8,"raw",0.0684657556575326,3.82090969011773,4.14470126258058
+"study_1","Relative liver weight",0,"mg/kg/day","%","Control","Male","Unspecified","Unspecified","Unspecified","Unspecified",4.34113541384447,0.149632318633289,8,"raw",0.0529030135951326,4.21603966491508,4.46623116277387
+"study_1","Relative liver weight",0.001,"mg/kg/day","%","Dose 0.001","Female","Unspecified","Unspecified","Unspecified","Unspecified",4.03602012010428,0.2452186270708,8,"raw",0.0866978770375088,3.83101221749978,4.24102802270878
+"study_1","Relative liver weight",0.001,"mg/kg/day","%","Dose 0.001","Male","Unspecified","Unspecified","Unspecified","Unspecified",4.39894680927095,0.333043141149738,8,"raw",0.117748531767324,4.12051577546449,4.67737784307741
+"study_1","Relative liver weight",0.01,"mg/kg/day","%","Dose 0.01","Female","Unspecified","Unspecified","Unspecified","Unspecified",3.95753134169751,0.240063943420253,8,"raw",0.0848754211554224,3.75683286246925,4.15822982092577
+"study_1","Relative liver weight",0.01,"mg/kg/day","%","Dose 0.01","Male","Unspecified","Unspecified","Unspecified","Unspecified",4.25262204713984,0.262379715695203,8,"raw",0.0927652381069383,4.0332671154074,4.47197697887229
+"study_1","Relative liver weight",0.1,"mg/kg/day","%","Dose 0.1","Female","Unspecified","Unspecified","Unspecified","Unspecified",4.01862922803954,0.176925256904296,8,"raw",0.0625525244601,3.87071601170284,4.16654244437624
+"study_1","Relative liver weight",0.1,"mg/kg/day","%","Dose 0.1","Male","Unspecified","Unspecified","Unspecified","Unspecified",4.41895101933348,0.231585361479401,8,"raw",0.0818777897628113,4.22534081199352,4.61256122667344
