@@ -1,4 +1,6 @@
-# StatLab 2.1
+# StatLab 2.1.1
+
+Patch 2.1.1 corrects time-axis distribution grouping, custom-colored grouped-bar errors and automatic Log10 limits for constant positive responses. See [CHANGELOG.md](CHANGELOG.md) and [patch verification](artifacts/QA_REPORT_2_1_1.md).
 
 A local, modular R Shiny workspace for comparing independent studies that share a scientific endpoint, including studies with non-overlapping dose ranges. There is **no software-imposed dataset-count limit**. The default home loads four clearly synthetic studies spanning 0 to 10,000 mg/kg/day.
 

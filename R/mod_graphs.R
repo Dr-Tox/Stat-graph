@@ -103,7 +103,9 @@ build_figure <- function(d,a=axis_settings(),g=graph_defaults(),prepared=NULL) {
  }
  if(nrow(resolved) && any(resolved$type=='bracket' & resolved$x1!=resolved$x2) && nrow(a$intervals)>1) notes <- c(notes,'Bracket segments with // continue across omitted X regions; endpoints retain their original group anchors.')
  yr <- if(a$independent_y) c(NA_real_,NA_real_) else range(c(allz$y,allz$ymin,allz$ymax,if(nrow(resolved)) resolved$plot_y),na.rm=TRUE)
- if(all(is.finite(yr)) && diff(yr)==0) yr <- yr+c(-.5,.5)
+ if(all(is.finite(yr)) && diff(yr)==0) {
+  yr <- if(a$y$scale=='log10') 10^(log10(yr)+c(-.05,.05)) else yr+c(-.5,.5)
+ }
  yr[!is.na(ybounds)] <- ybounds[!is.na(ybounds)]
  colors <- resolve_graph_colors(allz,g)
  panels <- list(); widths <- numeric()
@@ -118,11 +120,11 @@ build_figure <- function(d,a=axis_settings(),g=graph_defaults(),prepared=NULL) {
    dat <- add_display_x(dat,a,g)
    p <- ggplot2::ggplot(dat,ggplot2::aes(x=.x,y=y,color=.color,shape=.shape,group=.series,text=.tooltip,linetype=.linetype,alpha=.alpha))
    dodge <- ggplot2::position_dodge(width=g$error_width)
-   if(g$type=='Boxplot') p <- p+ggplot2::geom_boxplot(ggplot2::aes(x=.display_x,width=.body_width,group=interaction(.series,dose)),orientation='x',position='identity')
+   if(g$type=='Boxplot') p <- p+ggplot2::geom_boxplot(ggplot2::aes(x=.display_x,width=.body_width,group=interaction(.series,.x)),orientation='x',position='identity')
    else if(g$type=='Violin') {
-     cells <- table(interaction(dat$.series,dat$dose,drop=TRUE))
+     cells <- table(interaction(dat$.series,dat$.x,drop=TRUE))
      if(any(cells<2)) fail('Violin density requires at least two raw observations per displayed group.')
-     p <- p+ggplot2::geom_violin(ggplot2::aes(x=.display_x,width=.body_width,group=interaction(.series,dose)),orientation='x',position='identity')
+     p <- p+ggplot2::geom_violin(ggplot2::aes(x=.display_x,width=.body_width,group=interaction(.series,.x)),orientation='x',position='identity')
    } else if(g$type=='Bar') p <- p+ggplot2::geom_col(ggplot2::aes(x=.display_x,width=.body_width,fill=.color),position='identity')
    else p <- p+ggplot2::geom_point(size=g$point_size,position=if(g$type=='Individual points') ggplot2::position_jitter(width=g$error_width,height=0,seed=1) else ggplot2::position_identity())
    if(g$show_lines && g$type %in% c('Dose-response','Line')) {
@@ -131,7 +133,7 @@ build_figure <- function(d,a=axis_settings(),g=graph_defaults(),prepared=NULL) {
    }
    if(!g$type %in% c('Boxplot','Violin','Individual points','Scatter')) {
      eb <- ggplot2::geom_errorbar(ggplot2::aes(x=if(g$type=='Bar') .display_x else .x,ymin=ymin,ymax=ymax),width=g$error_width,linewidth=g$error_line_width,position=ggplot2::position_identity(),na.rm=TRUE)
-     if(nzchar(g$error_color)) eb <- ggplot2::geom_errorbar(ggplot2::aes(ymin=ymin,ymax=ymax),color=g$error_color,width=g$error_width,linewidth=g$error_line_width,position=ggplot2::position_identity(),na.rm=TRUE)
+     if(nzchar(g$error_color)) eb <- ggplot2::geom_errorbar(ggplot2::aes(x=if(g$type=='Bar') .display_x else .x,ymin=ymin,ymax=ymax),color=g$error_color,width=g$error_width,linewidth=g$error_line_width,position=ggplot2::position_identity(),na.rm=TRUE)
      p <- p+eb
    }
    if(g$type %in% c('Boxplot','Violin','Bar')) p <- p+ggplot2::scale_fill_manual(values=colors,drop=FALSE,guide='none')

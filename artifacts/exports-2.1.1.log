@@ -1,0 +1,9 @@
+PASS exposure_boxplot.png rendered
+PASS exposure_boxplot.svg rendered
+PASS exposure_boxplot.pdf rendered
+PASS colored_error_bars.png rendered
+PASS colored_error_bars.svg rendered
+PASS colored_error_bars.pdf rendered
+PASS constant_log_response.png rendered
+PASS constant_log_response.svg rendered
+PASS constant_log_response.pdf rendered

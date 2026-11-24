@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.1 — Graph correctness fixes
+
+- Keep boxplot and violin distributions separate at each selected X value, including exposure duration and collection time. Validate violin sample counts at that same grouping level.
+- Preserve grouped-bar error positions and intervals when assigning a custom error-bar color.
+- Expand constant positive responses multiplicatively on Log10 Y axes, avoiding invalid negative automatic limits.
+- Add regressions for both time axes, raw-data integrity, custom error colors across linear/log/pseudo-log X scales and facets, and constant responses on normal/reversed Log10 Y axes.
+
 ## 2.1 — Advanced Scientific Graph Editor
 
 This release extends the existing StatLab modules; it does not replace the comparison architecture or statistical engine.
