@@ -1,6 +1,6 @@
 # StatLab portable project format v2
 
-StatLab 2.1 saves a UTF-8 JSON object with `format: "StatLab"` and `version: 2`. Version 1 projects from StatLab 2.0 are accepted, normalized with compatible defaults and saved as v2 on the next export. No R code or serialized environments are evaluated. Imported project files are not modified.
+StatLab 2.1 and 2.2 save a UTF-8 JSON object with `format: "StatLab"` and `version: 2`. Version 1 projects from StatLab 2.0 are accepted, normalized with compatible defaults and saved as v2 on the next export. No R code or serialized environments are evaluated. Imported project files are not modified.
 
 ## Preserved structure
 
@@ -56,3 +56,7 @@ Resolved positions are derived at render time. Original X anchors (`x1`, `x2`) a
 Existing graph fields retain their names. Independent text properties and appearance fields receive defaults when absent. Version 1 source tables, mappings, results, metadata and presets remain available. The legacy single `annotation` string remains a user-provided corner label; it is not silently assigned to an experimental group.
 
 Settings are saved only after validation. Invalid live drafts are not serialized as if they were applied figures. Undo/redo history is session-local and not included in the project; scientific observations are never part of graph undo.
+
+## StatLab 2.2 interface compatibility
+
+The guided interface uses the existing fields: study checkboxes update `selected`, `settings.view.hidden` and `settings.graph.highlight`; treatment checkboxes update `settings.statistics.groups`. No second selection or statistical settings model was introduced. Source labels use retained `datasets.*.metadata.source` and legacy synthetic-example notes; studies without recorded provenance are labeled as unknown rather than assigned a filename. Presentation rounding, hidden columns and collapsed UI sections do not change project observations or exported numerical results.

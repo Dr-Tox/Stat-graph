@@ -5687,7 +5687,7 @@
           "evidence": "{\"engine\":\"StatLab independent groups\",\"version\":1,\"settings\":{\"dataset\":\"study_4\",\"endpoint\":\"Relative liver weight\",\"method\":\"Welch t-test\",\"groups\":[\"Control\",\"Dose 10000\"],\"control\":\"Control\",\"alpha\":0.050000000000000003,\"adjust\":\"holm\",\"strata\":{\"sex\":\"Male\",\"generation\":\"Unspecified\",\"exposure\":\"Unspecified\",\"collection_time\":\"Unspecified\",\"subgroup\":\"Unspecified\"}},\"groups\":[\"Control\",\"Dose 10000\"],\"pairs\":[{\"group1\":\"Control\",\"group2\":\"Dose 10000\"}],\"data_hash\":\"a5315aeff9bf99d7fd2d6645ad1c42782e3701996dcb4465659b1e3787d37b17\",\"result_hash\":\"c49188214e8cb57f91b6aab5fe915e748734b3480d3103f9dc8def8c275027de\",\"results\":[{\"method\":\"Welch t-test\",\"study\":\"study_4\",\"endpoint\":\"Relative liver weight\",\"comparison\":\"Control minus Dose 10000\",\"groups\":\"Control | Dose 10000\",\"sample_sizes\":\"Control: 8 | Dose 10000: 8\",\"estimate\":-1.3153067116493462,\"lower\":-1.5667764059377043,\"upper\":-1.0638370173609881,\"statistic\":-11.272547079247987,\"df\":13.316185876355558,\"p\":3.4629786740215063e-08,\"alpha\":0.050000000000000003,\"confidence\":0.94999999999999996,\"correction\":\"none\",\"assumptions\":\"Independent experimental units; approximately normal sampling distribution of means. Welch allows unequal variances.\"}]}"
         },
         {
-          "id": "ann_20261112040016.646725_937292",
+          "id": "ann_20261124062627.873666_937292",
           "type": "asterisk",
           "source": "manual",
           "label_mode": "literal",
@@ -5716,7 +5716,7 @@
           "evidence": ""
         },
         {
-          "id": "ann_20261112040021.664956_183444",
+          "id": "ann_20261124062633.125515_183444",
           "type": "bracket",
           "source": "automatic",
           "label_mode": "pvalue",
@@ -6276,7 +6276,7 @@
   "reproducibility": {
     "created": "2026-11-12 03:55:54",
     "R": "R version 4.5.3 (2026-03-11)",
-    "saved": "2026-11-12 04:00:32",
+    "saved": "2026-11-24 06:26:43",
     "packages": {
       "shiny": "1.14.0",
       "ggplot2": "4.0.3",

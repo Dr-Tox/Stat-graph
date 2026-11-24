@@ -1,0 +1,34 @@
+PASS example provenance is visible beside study names
+PASS Compare checkbox directly deselects a study
+PASS Show checkbox restores and selects a study
+PASS hiding retains the comparison selection
+PASS Highlight checkbox changes state
+PASS two studies selected using independent checkboxes without Ctrl
+PASS empty import screen explains the first action
+PASS summary data guidance explains SD and sample size
+PASS unsupported summary-wide combination is not offered
+PASS ux-summary-template.csv downloaded
+PASS source preview is clearly identified
+PASS changing import settings clears prior confirmation
+PASS guided summary import adds a study
+PASS manager identifies the retained source
+PASS technical identity columns hidden by default
+PASS technical columns remain accessible
+PASS statistics identifies the study source
+PASS empty statistics screen explains selection
+PASS select all treatments includes every available group
+PASS treatment checkboxes can all be cleared before choosing a pair
+PASS two treatment checkboxes remain selected
+PASS Welch test runs on selected summary groups without fabricating observations
+PASS ux-roundtrip.json downloaded
+PASS checkbox treatment selection is serialized
+PASS verified statistical results are serialized
+PASS clear treatments works
+PASS project reopening restores checkbox selections
+PASS 25 simultaneous CSV imports preserve all 30 independent studies
+PASS study search finds imported file names
+PASS checkbox updates preserve the study search
+PASS a searched study can be reselected outside the first table page
+PASS guided import fits a narrow viewport
+PASS no browser JavaScript errors
+Guided UX browser verification complete.

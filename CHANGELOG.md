@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.0 — Guided data and comparison workflows
+
+- Replace read-only study booleans with direct Compare/Show/Highlight checkboxes. Retain search, arbitrary study counts, ordering and batch actions.
+- Label synthetic examples and recorded imported sources in comparison, data management and statistics.
+- Separate Import Data from Manage Studies. Add numbered steps, raw/summary guidance, downloadable templates, synthetic source previews and a confirmation that resets when import settings change.
+- Keep optional column mappings, study metadata and explicit unit conversions expandable. Prevent the unsupported summary-wide combination in the UI and validate it server-side.
+- Keep source/precision intact while hiding technical/irrelevant columns by default; all columns and existing editing/endpoint-harmonization functions remain accessible.
+- Replace statistical treatment chips with labeled checkboxes, preview selection before inference, compact readable tables and expandable details/diagnostics. Keep single-study/stratum safeguards and every existing statistical method.
+- Remove the obsolete hidden selection widget that could overwrite checkbox changes. Restore filters explicitly while bindings synchronize, then accept user changes normally.
+- Preserve project format v2, presets, all graph/axis/annotation settings and dependencies. Statistical calculation source is unchanged.
+
+
 ## 2.1.1 — Graph correctness fixes
 
 - Keep boxplot and violin distributions separate at each selected X value, including exposure duration and collection time. Validate violin sample counts at that same grouping level.

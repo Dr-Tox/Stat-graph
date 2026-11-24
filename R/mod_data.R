@@ -1,46 +1,67 @@
 data_ui <- function(id) {
  ns <- shiny::NS(id)
- shiny::fluidRow(shiny::column(4,
- shiny::h3('Import & map'),
- shiny::fileInput(ns('files'),'CSV / Excel files',multiple=TRUE,accept=c('.csv','.xlsx')),
- shiny::numericInput(ns('sheet'),'Excel sheet number',1,min=1),
- shiny::textAreaInput(ns('paste'),'Paste a table with a header (tabs or CSV)',rows=4),
- shiny::actionButton(ns('read_paste'),'Use pasted / manual table'),
- shiny::helpText('For manual entry, paste a header and one row, then add or edit observations below.'),
- shiny::selectInput(ns('file'),'Preview / mapping template',choices=character()),
- shiny::selectInput(ns('mode'),'Input mode',c('Individual observations'='raw','Summary means (SD and n when available)'='summary')),
- shiny::selectInput(ns('format'),'Layout',c('Long / summary'='long','Wide: numeric dose headers'='wide')),
- shiny::uiOutput(ns('mapping')),
- shiny::helpText('Mapped endpoint/unit columns take precedence over fallback labels. Keep distinct biological endpoints separate.'),
- shiny::textInput(ns('endpoint'),'Fallback / common biological endpoint','Relative liver weight'),
- shiny::checkboxInput(ns('confirm_endpoint'),'I confirm endpoint identity and the selected mappings',FALSE),
- shiny::textInput(ns('dose_unit'),'Fallback source X / dose unit','mg/kg/day'),shiny::textInput(ns('target_dose'),'Target X / dose unit (blank = retain source)','mg/kg/day'),
- shiny::textInput(ns('response_unit'),'Fallback source response unit','%'),shiny::textInput(ns('target_response'),'Target response unit (blank = retain source)','%'),
- shiny::textInput(ns('name'),'Study name (single import; blank = file name)'),
- shiny::textInput(ns('species'),'Species / model'),shiny::textAreaInput(ns('notes'),'Study metadata / notes'),
- shiny::checkboxInput(ns('all_files'),'Import every loaded file using this mapping',FALSE),
- shiny::actionButton(ns('import'),'Validate & add studies',class='btn-primary')),
- shiny::column(8,shiny::h3('Source preview'),DT::DTOutput(ns('preview')),
- shiny::h3('Dataset registry'),shiny::selectInput(ns('dataset'),'Edit dataset',choices=character()),
- shiny::fluidRow(shiny::column(6,shiny::textInput(ns('rename'),'Display name')),shiny::column(6,shiny::actionButton(ns('save_meta'),'Save metadata / name'))),
- shiny::textAreaInput(ns('edit_notes'),'Dataset notes'),
- shiny::fluidRow(shiny::column(4,shiny::actionButton(ns('up'),'Move up')),shiny::column(4,shiny::actionButton(ns('down'),'Move down')),shiny::column(4,shiny::actionButton(ns('remove'),'Remove dataset'))),
- shiny::h4('Canonical observations'),shiny::helpText('Double-click to edit. Validation rejects inconsistent edits. Dataset identity and input mode are protected. Select rows to delete.'),
- DT::DTOutput(ns('table')),shiny::actionButton(ns('add_row'),'Add observation / treatment group'),
- shiny::actionButton(ns('delete_rows'),'Delete selected rows'),
- shiny::h4('Add another response variable without reimporting'),shiny::uiOutput(ns('variables')),
- shiny::textInput(ns('variable_endpoint'),'Biological endpoint name for this variable'),
- shiny::textInput(ns('variable_unit'),'Response unit for this variable'),
- shiny::actionButton(ns('add_variable'),'Add mapped endpoint to this study'),
- shiny::h4('Harmonize an existing study'),shiny::selectInput(ns('remap_source_endpoint'),'Source endpoint to harmonize',choices=character()),
- shiny::textInput(ns('mapped_endpoint'),'Endpoint name'),shiny::textInput(ns('mapped_dose'),'Target dose unit'),shiny::textInput(ns('mapped_response'),'Target response unit'),
- shiny::checkboxInput(ns('confirm_remap'),'I confirm endpoint equivalence and unit conversion'),
- shiny::actionButton(ns('remap'),'Apply explicit harmonization')))
+ condition <- function(value) paste0("input['",ns('source_method'),"'] == '",value,"'")
+ shiny::div(class='guided-workspace',shiny::h2('Your data, ready to compare'),
+  shiny::p('Import a study in three steps. Your existing studies remain available and are never replaced by an import.'),
+  shiny::tabsetPanel(id=ns('workspace_tab'),
+   shiny::tabPanel('Import Data',value='import',shiny::fluidRow(
+    shiny::column(5,
+     shiny::div(class='workflow-card',shiny::h3('1. Choose your data'),
+      shiny::radioButtons(ns('source_method'),'How would you like to add data?',c('Upload CSV / Excel'='file','Paste from Excel / enter a table'='paste'),inline=FALSE),
+      shiny::conditionalPanel(condition('file'),shiny::fileInput(ns('files'),'Choose one or more files',multiple=TRUE,accept=c('.csv','.xlsx')),
+       shiny::tags$details(shiny::tags$summary('Excel options'),shiny::numericInput(ns('sheet'),'Sheet number',1,min=1))),
+      shiny::conditionalPanel(condition('paste'),shiny::textAreaInput(ns('paste'),'Paste cells including the header row',rows=6,placeholder='dose\tvalue\tsex\n0\t4.2\tFemale\n1\t4.8\tFemale'),
+       shiny::actionButton(ns('read_paste'),'Preview pasted data'),shiny::helpText('You can also type a header and one row here, then add observations in Manage Studies.')),
+      shiny::selectInput(ns('file'),'Loaded table to preview',choices=character())),
+     shiny::div(class='workflow-card',shiny::h3('2. Describe your measurements'),
+      shiny::radioButtons(ns('mode'),'What does each row represent?',c('One individual measurement'='raw','One group: mean, SD and sample size'='summary')),
+      shiny::uiOutput(ns('mode_guide')),shiny::downloadButton(ns('template'),'Download CSV template'),
+      shiny::actionButton(ns('example'),'Preview an example table'),shiny::helpText('Example tables are synthetic and are not imported until you confirm.'),
+      shiny::selectInput(ns('format'),'How is the table arranged?',c('One dose and response per row'='long','Doses in column headers (individual data)'='wide')),
+      shiny::h4('Match the columns in your table'),shiny::uiOutput(ns('mapping')),
+      shiny::textInput(ns('endpoint'),'What was measured? (biological endpoint)','Relative liver weight'),
+      shiny::helpText('Used when there is no endpoint column. Do not combine biologically different measurements.'),
+      shiny::textInput(ns('dose_unit'),'Dose unit used in your table','mg/kg/day'),shiny::textInput(ns('response_unit'),'Response unit used in your table','%'),
+      shiny::tags$details(shiny::tags$summary('Optional unit conversion'),shiny::helpText('Leave blank to retain original units. Conversions are explicit and checked for compatibility.'),
+       shiny::textInput(ns('target_dose'),'Convert dose to',value=''),shiny::textInput(ns('target_response'),'Convert response to',value='')),
+      shiny::tags$details(shiny::tags$summary('Optional study metadata'),shiny::textInput(ns('species'),'Species / model'),shiny::textAreaInput(ns('notes'),'Study notes')))),
+    shiny::column(7,shiny::div(class='workflow-card',shiny::h3('3. Review and import'),
+      shiny::uiOutput(ns('import_status')),DT::DTOutput(ns('preview')),
+      shiny::textInput(ns('name'),'Study name (blank = file name)'),
+      shiny::checkboxInput(ns('all_files'),'Import all loaded files with these column choices',FALSE),
+      shiny::checkboxInput(ns('confirm_endpoint'),'I checked the endpoint, units and column choices',FALSE),
+      shiny::actionButton(ns('import'),'Import studies',class='btn-primary'),shiny::uiOutput(ns('import_result')))))),
+   shiny::tabPanel('Manage Studies',value='manage',shiny::div(class='workflow-card',
+    shiny::h3('Choose a study to inspect or edit'),shiny::selectInput(ns('dataset'),'Study',choices=character()),shiny::uiOutput(ns('origin')),
+    shiny::fluidRow(shiny::column(5,shiny::textInput(ns('rename'),'Display name')),shiny::column(7,shiny::actionButton(ns('save_meta'),'Save name / notes'))),
+    shiny::textAreaInput(ns('edit_notes'),'Study notes'),
+    shiny::div(class='compact-actions',shiny::actionButton(ns('up'),'Move up'),shiny::actionButton(ns('down'),'Move down'),shiny::actionButton(ns('remove'),'Remove dataset')),
+    shiny::h4('Observations'),shiny::helpText('Double-click a cell to edit. Select rows to delete. Display rounding never changes the stored measurements.'),
+    shiny::checkboxInput(ns('technical'),'Show all columns (identifiers and fixed factors)',FALSE),DT::DTOutput(ns('table')),
+    shiny::actionButton(ns('add_row'),'Add observation / treatment group'),shiny::actionButton(ns('delete_rows'),'Delete selected rows'),
+    shiny::tags$details(shiny::tags$summary('Add another endpoint from the original table'),shiny::uiOutput(ns('variables')),
+     shiny::textInput(ns('variable_endpoint'),'Biological endpoint name'),shiny::textInput(ns('variable_unit'),'Response unit'),shiny::actionButton(ns('add_variable'),'Add mapped endpoint to this study')),
+    shiny::tags$details(shiny::tags$summary('Harmonize endpoint names or convert units'),shiny::selectInput(ns('remap_source_endpoint'),'Source endpoint',choices=character()),
+     shiny::textInput(ns('mapped_endpoint'),'Common biological endpoint'),shiny::textInput(ns('mapped_dose'),'Target dose unit'),shiny::textInput(ns('mapped_response'),'Target response unit'),
+     shiny::checkboxInput(ns('confirm_remap'),'I confirm endpoint equivalence and unit conversion'),shiny::actionButton(ns('remap'),'Apply explicit harmonization'))))))
 }
 data_server <- function(id,state) shiny::moduleServer(id,function(input,output,session) {
  sources <- shiny::reactiveVal(list())
  table_refresh <- shiny::reactiveVal(0L)
+ import_message <- shiny::reactiveVal(NULL)
+ output$import_result <- shiny::renderUI({text <- import_message();if(length(text)) shiny::div(class='source-card',text)})
+ output$mode_guide <- shiny::renderUI({
+  if(input$mode=='summary') shiny::helpText('Example: dose = 1, mean = 4.5, SD = 0.4, n = 8. Do not enter SEM in the SD column. SD and n are optional for mean-only plots; inference requires them.')
+  else shiny::helpText('Example: dose = 1, value = 4.5. Enter one row for each animal or experimental unit. Repeat the dose for individual replicates.')
+ })
+ output$template <- shiny::downloadHandler(filename=function() paste0('statlab_',input$mode,'_template.csv'),content=function(file) utils::write.csv(import_template(input$mode),file,row.names=FALSE))
+ shiny::observeEvent(input$example,{sources(list('Synthetic example table'=import_template(input$mode)));shiny::updateSelectInput(session,'file',choices='Synthetic example table',selected='Synthetic example table')})
+ shiny::observeEvent(input$mode,{shiny::updateSelectInput(session,'format',choices=if(input$mode=='summary') c('One group per row'='long') else c('One dose and response per row'='long','Doses in column headers'='wide'),selected=if(input$mode=='summary') 'long' else shiny::isolate(input$format %||% 'long'))})
  guard <- function(expr) tryCatch(force(expr),error=function(e) {table_refresh(table_refresh()+1L);shiny::showNotification(conditionMessage(e),type='error',duration=12)})
+ shiny::observeEvent(list(sources(),input$file,input$mode,input$format,input$endpoint,input$dose_unit,input$response_unit,input$target_dose,input$target_response,
+  lapply(c('dataset_id','endpoint','dose_unit','response_unit','dose','value','mean','sd','n','treatment',factors),function(key) input[[paste0('map_',key)]])),{
+  import_message(NULL);shiny::updateCheckboxInput(session,'confirm_endpoint',value=FALSE)
+ },ignoreInit=TRUE)
  shiny::observeEvent(input$files,guard({
    files <- input$files; tabs <- lapply(seq_len(nrow(files)),function(i) read_table_file(files$datapath[i],files$name[i],input$sheet))
    names(tabs) <- make.unique(files$name); sources(tabs)
@@ -55,18 +76,23 @@ data_server <- function(id,state) shiny::moduleServer(id,function(input,output,s
    sources(list('Manual table'=tab)); shiny::updateSelectInput(session,'file',choices='Manual table',selected='Manual table')
  }))
  source <- shiny::reactive({shiny::req(input$file); sources()[[input$file]]})
+ output$import_status <- shiny::renderUI({
+  if(is.null(input$file) || !length(sources()) || is.null(sources()[[input$file]])) return(shiny::div(class='empty-guide','Start at step 1: upload a file or paste a table. A preview will appear here.'))
+  tab <- sources()[[input$file]];shiny::div(class='source-card',shiny::strong(input$file),shiny::div(paste(nrow(tab),'rows ·',ncol(tab),'columns')),shiny::p('Choose the measurement type and match columns in step 2. This preview has not been imported.'))
+ })
  output$preview <- DT::renderDT({shiny::req(source()); DT::datatable(head(source(),100),options=list(scrollX=TRUE,pageLength=5))})
  output$mapping <- shiny::renderUI({
    shiny::req(source()); cols <- names(source()); ns <- session$ns
    keys <- c('dataset_id','endpoint','dose_unit','response_unit',if(input$format!='wide') 'dose',if(input$format!='wide') if(input$mode=='raw') 'value' else c('mean','sd','n'),'treatment',factors)
    aliases <- list(dataset_id=c('study_name','dataset_id'),dose=c('dose_mg_kg_day','dose'),value=c('value','response'),mean=c('mean_serumconc_ng_ML','mean'),sd=c('sd_serumconc','sd'),n=c('n'),exposure=c('days_exposed','exposure'))
-   shiny::tagList(if(input$format=='wide') shiny::selectizeInput(ns('wide'),'Response columns (headers must be numeric doses)',cols,multiple=TRUE),
-     lapply(keys,function(key) {
-       candidate <- intersect(aliases[[key]] %||% key,cols)
-       shiny::selectInput(ns(paste0('map_',key)),paste('Map',key),c('(none)',cols),selected=if(length(candidate)) candidate[1] else '(none)')
-     }))
+   labels <- c(dataset_id='Study identifier (splits a table into independent studies)',endpoint='Biological endpoint column',dose_unit='Dose unit column',response_unit='Response unit column',dose='Dose column',value='Individual response column',mean='Group mean column',sd='Standard deviation (SD) column',n='Sample size (n) column',treatment='Treatment / group name',sex='Sex',generation='Generation',exposure='Exposure duration',collection_time='Collection time',subgroup='Other experimental subgroup')
+   field <- function(key) {candidate <- intersect(aliases[[key]] %||% key,cols);shiny::selectInput(ns(paste0('map_',key)),labels[[key]],c('Not in this table'='(none)',stats::setNames(cols,cols)),selected=if(length(candidate)) candidate[1] else '(none)')}
+   required <- intersect(keys,c('dose','value','mean','sd','n'))
+   shiny::tagList(if(input$format=='wide') shiny::selectizeInput(ns('wide'),'Measurement columns (numeric dose headers)',cols,multiple=TRUE),
+    lapply(required,field),shiny::tags$details(shiny::tags$summary('Optional groups, study IDs and columns for endpoints / units'),lapply(setdiff(keys,required),field)))
  })
  shiny::observeEvent(input$import,guard({
+   if(input$mode=='summary' && input$format=='wide') fail('Summary data requires one group per row. Use the summary template.')
    if(!isTRUE(input$confirm_endpoint)) fail('Confirm endpoint identity and mappings before importing.')
    tabs <- if(input$all_files) sources() else sources()[input$file]
    if(!length(tabs)) fail('Load a source table first.')
@@ -86,7 +112,7 @@ data_server <- function(id,state) shiny::moduleServer(id,function(input,output,s
          list(columns=mapping,mode=input$mode,endpoint=input$endpoint,source_dose_unit=input$dose_unit,source_response_unit=input$response_unit))
      }
    }
-   state$project <- p; shiny::showNotification('Datasets added. Existing observations were retained.',type='message')
+   added <- length(p$datasets)-length(state$project$datasets);state$project <- p;import_message(paste('Imported',added,if(added==1) 'study.' else 'studies.','Open Compare Datasets to plot them, or Manage Studies to edit observations.')); shiny::showNotification('Datasets added. Existing observations were retained.',type='message')
  }))
  shiny::observe({
    p <- state$project; choices <- stats::setNames(names(p$datasets),vapply(p$datasets,function(x) paste0(x$name,' [',x$id,']'),character(1)))
@@ -101,7 +127,13 @@ data_server <- function(id,state) shiny::moduleServer(id,function(input,output,s
    shiny::updateTextInput(session,'mapped_endpoint',value=unique(d$endpoint)[1]); shiny::updateTextInput(session,'mapped_dose',value=unique(d$dose_unit)[1]); shiny::updateTextInput(session,'mapped_response',value=unique(d$response_unit)[1])
  })
  editing <- shiny::reactive({d <- state$project$data; d[d$dataset_id==input$dataset,,drop=FALSE]})
- output$table <- DT::renderDT({table_refresh();DT::datatable(editing(),rownames=FALSE,editable=list(target='cell',disable=list(columns=match(c('dataset_id','mode'),names(empty_data()))-1)),selection='multiple',options=list(scrollX=TRUE,pageLength=10))},server=TRUE)
+ output$origin <- shiny::renderUI({shiny::req(input$dataset);source_card(state$project$datasets[[input$dataset]],editing())})
+ output$table <- DT::renderDT({
+  table_refresh();d <- editing();hidden <- if(isTRUE(input$technical)) character() else c('dataset_id','mode','endpoint','dose_unit','response_unit',factors[vapply(d[factors],function(x) all(x=='Unspecified'),logical(1))],if(all(d$mode=='raw')) c('mean','sd','n') else if(all(d$mode=='summary')) 'value')
+  tab <- DT::datatable(d,rownames=FALSE,editable=list(target='cell',disable=list(columns=match(c('dataset_id','mode'),names(d))-1)),selection='multiple',options=list(scrollX=TRUE,pageLength=10,columnDefs=list(list(targets=which(names(d) %in% hidden)-1,visible=FALSE))))
+  numeric <- names(d)[vapply(d,is.numeric,logical(1))];if(length(numeric)) tab <- DT::formatSignif(tab,columns=numeric,digits=6)
+  tab
+ },server=TRUE)
  shiny::observeEvent(input$table_cell_edit,guard({
    info <- input$table_cell_edit; d <- editing(); col <- names(d)[info$col+1]
    if(col %in% c('dataset_id','mode')) fail('Dataset identity and input mode are protected.')

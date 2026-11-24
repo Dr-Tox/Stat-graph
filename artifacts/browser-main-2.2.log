@@ -1,0 +1,27 @@
+PASS default four-study comparison renders
+PASS interactive graph has data points
+PASS arbitrary subset selected
+PASS male subgroup filtered independently
+PASS three interval graph renders
+PASS split axis uses actual plot panels
+PASS browser-export.png downloaded
+PASS browser-export.svg downloaded
+PASS browser-export.pdf downloaded
+PASS browser-project.json downloaded
+PASS project stores study selection and three axis intervals
+PASS project stores subgroup filter
+PASS project restores selected studies
+PASS project restores subgroup filter
+PASS project restores split axes
+PASS explicit statistical comparison executes
+PASS manual/pasted data imports
+PASS new dataset immediately available
+PASS editing an observation commits validated value
+PASS invalid numeric edit rejected and original value restored
+PASS adding observations updates editable table
+PASS another endpoint mapped from retained source without reimport
+Final selection: 30 independent studies · 1861 input rows · Relative liver weight · raw
+PASS 25 simultaneous file imports add studies without overwriting
+PASS no browser JavaScript errors
+PASS no external browser data requests
+Browser workflow complete.

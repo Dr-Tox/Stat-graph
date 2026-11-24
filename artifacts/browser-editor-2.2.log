@@ -1,0 +1,45 @@
+PASS 2.1 default comparison renders
+PASS editor category expands
+PASS editor category collapses
+PASS independent main-title typography reaches Plotly
+PASS title/color edits reuse numeric preparation
+PASS axis title is independently editable
+PASS manual title survives other styling changes
+PASS undo preserves earlier title
+PASS study search locates named study
+PASS selected study can be hidden
+PASS hidden study can be restored
+PASS highlighting updates display
+PASS non-highlighted studies have reduced opacity
+PASS study display order is editable
+PASS three intervals added through editor
+PASS relative interval width can be edited
+PASS invalid reordered interval draft is rejected
+PASS empty interval does not replace valid graph
+PASS interval can be removed to restore valid layout
+PASS manual annotations require no internal analysis
+PASS manual letters, Unicode and validated asterisks appear together
+PASS annotations coexist with male/female facets
+PASS custom main title appears once on split figure
+Complex numeric preparation counts: 3 3
+PASS complex-figure typography reuses prepared scientific values
+PASS manual asterisk is added through the interface
+PASS automatic comparison annotation is available in manager
+PASS editor-browser-21.png exported
+PASS editor-browser-21.svg exported
+PASS editor-browser-21.pdf exported
+PASS editor-21-project.json exported
+PASS new projects use version 2
+PASS multiple annotation definitions and provenance are serialized
+PASS manual star keeps its exact study, sex and treatment anchor
+PASS automatic p-value annotation retains validated numeric result
+PASS restored graph type remains unchanged by typography edits
+PASS independent typography and axis labels are serialized
+PASS title and annotated split figure survive save/reopen
+PASS unsupported automatic omnibus comparison is explained and rejected
+PASS valid all-pairs Tukey compact letters are generated through UI
+PASS StatLab 2.0 project reopens with defaults
+PASS responsive workspace fits small screen
+PASS no browser JavaScript errors
+PASS no external browser data requests
+Advanced editor browser workflow complete.

@@ -1,0 +1,13 @@
+PASS 99% Welch inference completed
+PASS statistical-results.csv exported
+PASS statistical-results.xlsx exported
+PASS statistical-project.json exported
+PASS project stores actual confidence level and numerical results
+Restored inputs: {
+  dataset: 'study_1',
+  sex: 'Female',
+  method: 'Welch t-test',
+  groups: [ 'Control', 'Dose 0.001' ]
+}
+PASS statistics dataset, stratum, method and groups restored
+PASS saved inferential result retained after reopening

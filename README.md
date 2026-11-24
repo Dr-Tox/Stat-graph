@@ -1,9 +1,26 @@
-# StatLab 2.1.1
+# StatLab 2.2.0
 
-Patch 2.1.1 corrects time-axis distribution grouping, custom-colored grouped-bar errors and automatic Log10 limits for constant positive responses. See [CHANGELOG.md](CHANGELOG.md) and [patch verification](artifacts/QA_REPORT_2_1_1.md).
+Version 2.2.0 adds guided import, clear study provenance and direct study/treatment selection while retaining the existing scientific functionality and the 2.1.1 plotting fixes. See [CHANGELOG.md](CHANGELOG.md) and [verification](artifacts/QA_REPORT_2_2.md).
 
 A local, modular R Shiny workspace for comparing independent studies that share a scientific endpoint, including studies with non-overlapping dose ranges. There is **no software-imposed dataset-count limit**. The default home loads four clearly synthetic studies spanning 0 to 10,000 mg/kg/day.
 
+
+
+## New in 2.2: Guided workflows
+
+**Compare Datasets:** use the **Compare**, **Show** and **Highlight** checkboxes beside each study. No Ctrl/Cmd key or hidden row action is needed. Compare controls active selection; Show hides/restores a study without deleting it; showing an inactive study also selects it. Highlight dims the other displayed studies. Search, batch row actions, ordering, subgroup filters and the complete Graph Editor remain available. Study names include their recorded source or an explicit synthetic-example label.
+
+**Data Manager → Import Data:**
+
+1. Upload one or more CSV/XLSX files, or choose paste/manual entry and paste cells including headers.
+2. Choose individual measurements or group summaries. Download a matching CSV template or preview a synthetic example. Match dose and response columns; add optional treatment, sex, study ID and other factors when present. Confirm the biological endpoint and source units. Unit conversion and metadata remain optional advanced controls.
+3. Review the source table and study name, check the confirmation and click **Import studies**. Changing the source, mapping, measurement type, endpoint or units clears the prior confirmation. Existing studies are retained. Summary-wide layouts are not offered; supported wide individual tables remain available.
+
+**Data Manager → Manage Studies:** choose a study to see its provenance, observations and metadata. Double-click cells to edit, add observations, or select rows to delete. Default columns show useful measurements and variable factors. **Show all columns** exposes identifiers, fixed factors and unused raw/summary fields. Numeric display rounding never rewrites stored values. Additional endpoint mapping, explicit harmonization, rename/reorder and removal are preserved.
+
+**Statistics:** choose one study and endpoint, then the experimental factors that have multiple available levels. Tick treatment checkboxes (with dose and sample-size labels), inspect the preview, choose a method and run it explicitly. Fixed factors remain part of the analysis scope. This workspace never pools studies. Dunnett exposes a control selector; Dunn exposes its correction setting. Compact results retain full precision internally and in exports; **Show all result details** reveals every engine field. Diagnostics are expandable. Saved projects restore the last analyzed treatment selection and comparison filters.
+
+Project format remains v2 and existing graph presets/projects remain compatible. The statistical engine and dependencies are unchanged. See [2.2 QA evidence](artifacts/QA_REPORT_2_2.md) for executed tests and screenshots.
 
 ## New in 2.1: Advanced Scientific Graph Editor
 
@@ -119,6 +136,7 @@ node scripts/browser_smoke.cjs
 node scripts/browser_statistics_project.cjs
 node scripts/browser_editor_21.cjs
 node scripts/browser_render_21.cjs
+node scripts/browser_guided_ux.cjs
 # Visual checks also require Python/Pillow and pdftotext:
 Rscript scripts/profile_editor_21.R
 python scripts/verify_visuals_21.py
@@ -135,7 +153,8 @@ Synthetic data includes 25 CSV studies, an XLSX workbook, summary data, wide raw
 - `R/mod_graphs.R`: graph preparation, protected series grouping, ggplot panel construction and Plotly rendering.
 - `R/graph_settings.R`, `graph_rendering.R`, `graph_editor_ui.R`: compatible configuration, stable encodings, styling and hierarchical editor.
 - `R/mod_annotations.R`, `mod_annotation_editor.R`: anchored manual annotations, validated statistical evidence, compact letters and annotation UI.
-- `R/mod_data.R`: batch import, mapping, source retention, editing, dataset registry.
+- `R/mod_data.R`: guided import, templates, mapping, source retention, editing and dataset registry.
+- `R/ux_helpers.R`: source labels, templates and validated direct study toggles; no alternative scientific data model.
 - `R/statistical_methods.R`, `mod_statistics.R`: sufficient-statistic calculations and scoped inferential UI.
 - `R/mod_export.R`: exports, presets and project restoration.
 

@@ -1,4 +1,4 @@
-# StatLab 2.1 acceptance mapping
+# StatLab 2.2 acceptance mapping
 
 This file describes the extended 2.0 implementation. See RELEASE_2_1.md for the Graph Editor release scope and artifacts/QA_REPORT_2_1.md for executed verification. See README for supported workflows and limits.
 
@@ -43,3 +43,7 @@ Modular local Shiny; Compare Datasets home; raw/summary import; CSV/XLSX/paste; 
 ## Graph Editor acceptance coverage
 
 The original 239 R assertions remain passing. The extended suite covers stable study/group encodings, complete annotation identities, automatic evidence and rejection rules, compact letters, typography persistence, interval edits, safe resets/history, original coordinates and static exports. Chromium workflows exercise hierarchy, title edits without numeric re-preparation, study search/hide/highlight/order, interval-table validation, manual and automatic annotations, v1 loading and v2 round trips. Exact executed totals and screenshot/export links are recorded in the release QA report. No dataset-count maximum is imposed.
+
+## StatLab 2.2 guided workflow update
+
+Direct Compare/Show/Highlight checkboxes replace read-only study booleans. Import and editing are separate guided workspaces with source provenance and raw/summary CSV templates. Statistical treatments use explicit native checkboxes with a selection preview. Existing scientific methods, arbitrary study/interval counts, all graph/axis/annotation functions and versioned projects remain available. See `artifacts/QA_REPORT_2_2.md` for executed regression results.

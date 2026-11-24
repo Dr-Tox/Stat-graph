@@ -24,3 +24,16 @@ h3{font-size:21px}h4{font-size:16px}.shiny-plot-output,.plotly{background:white;
 .properties-collapsed{grid-template-columns:minmax(0,1fr)}.properties-collapsed>.workspace-properties{display:none}
 @media(max-width:1000px){.statlab-workspace{grid-template-columns:320px minmax(0,1fr)}.tab-content{padding:8px 10px}}
 @media(max-width:760px){.statlab-workspace{display:flex;flex-direction:column}.workspace-figure{order:0;width:100%}.workspace-properties{order:1;position:static;max-height:none;width:100%}.local-badge{float:none;display:block;margin-top:6px}.figure-toolbar .btn{font-size:11px}.properties-collapsed>.workspace-properties{display:none}}
+
+/* Guided workflows and direct study selection. */
+.guided-workspace {max-width:1600px;margin:0 auto;padding:12px 20px 36px;}
+.workflow-card {background:#fff;border:1px solid #dce5ed;border-radius:12px;padding:20px;margin:16px 0;}
+.workflow-card h3 {font-size:20px;color:#146c78;margin-top:0;}
+.source-card {border-left:4px solid #146c78;background:#edf7f7;border-radius:6px;padding:14px;margin:12px 0;overflow-wrap:anywhere;}
+.empty-guide {background:#f4f7fb;border:1px dashed #9aadb9;padding:20px;border-radius:8px;margin:12px 0;color:#405966;}
+.study-origin {display:block;font-size:10px;color:#526c7b;white-space:normal;}
+.study-toggle {width:18px;height:18px;accent-color:#146c78;cursor:pointer;}
+.workflow-card .shiny-input-container {width:100%;max-width:100%;}
+.workflow-card .checkbox label {white-space:normal;}
+.guided-workspace .well {background:transparent;border:none;box-shadow:none;padding:0 16px 0 0;}
+@media(max-width:767px){.guided-workspace{padding:8px}.workflow-card{padding:14px}.guided-workspace .well{padding:0}}

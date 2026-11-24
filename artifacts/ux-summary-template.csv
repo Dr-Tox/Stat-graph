@@ -1,0 +1,4 @@
+"dose","mean","sd","n","sex","treatment"
+0,4,0.3,8,"Female","Control"
+1,4.5,0.4,8,"Female","Low"
+10,5,0.5,8,"Female","High"
